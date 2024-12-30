@@ -1,0 +1,40 @@
+# Título do Projeto
+print('Bem-vindo ao sistema Elia Tawil')
+
+# Insere o valor do plano em reais
+valorBase = float(input('Informe o valor Base do plano: R$ '))
+
+# Insere a idade do cliente
+idade = int(input('Informe a idade do cliente: '))
+
+# Verifica a idade e calcula o valor mensal do plano
+# com base em faixas etárias pré-definidas
+if idade >= 0 and idade < 19:
+    # Faixa etária: 0-18 anos, valor mensal = 100% do valor base
+    valorMensal = 100/100 * valorBase
+    print(f'O valor mensal do plano é de: R$ {valorMensal:.2f}')
+
+elif idade >= 19 and idade < 29:
+    # Faixa etária: 19-28 anos, valor mensal = 150% do valor base
+    valorMensal = 150/100 * valorBase
+    print(f'O valor mensal do plano é de: R$ {valorMensal:.2f}')
+
+elif idade >= 29 and idade < 39:
+    # Faixa etária: 29-38 anos, valor mensal = 225% do valor base
+    valorMensal = 225/100 * valorBase
+    print(f'O valor mensal do plano é de: R$ {valorMensal:.2f}')
+
+elif idade >= 39 and idade < 49:
+    # Faixa etária: 39-48 anos, valor mensal = 240% do valor base
+    valorMensal = 240/100 * valorBase
+    print(f'O valor mensal do plano é de: R$ {valorMensal:.2f}')
+
+elif idade >= 49 and idade < 59:
+    # Faixa etária: 49-58 anos, valor mensal = 350% do valor base
+    valorMensal = 350/100 * valorBase
+    print(f'O valor mensal do plano é de: R$ {valorMensal:.2f}')
+
+elif idade >= 59:
+    # Faixa etária: 59 anos ou mais, valor mensal = 600% do valor base
+    valorMensal = 600/100 * valorBase
+    print(f'O valor mensal do plano é de: R$ {valorMensal:.2f}')
