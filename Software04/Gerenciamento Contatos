@@ -1,0 +1,145 @@
+print('Bem-vindos à lista de contatos do Elia Tawil')
+
+# Inicializa a lista de contatos e o ID inicial global
+lista_contatos = []
+id_global = 5034304
+
+# Função para cadastrar um novo contato
+def cadastrar_contato(id):
+   print('-' * 30)
+   print('MENU CADASTRAR CONTATOS \n')
+   print(f'Id do contato {id}')  # Exibe o ID gerado automaticamente
+   # Solicita ao usuário os dados do contato
+   nome = input('Digite o nome do contato: ')
+   telefone = int(input('Digite o telefone do contato: '))
+   atividade = input('Digite a atividade do contato: ')
+   # Armazena os dados do contato em um dicionário
+   contato = {
+       'Id': id,
+       'Nome': nome,
+       'Telefone': telefone,
+       'Atividade': atividade
+   }
+   # Adiciona o dicionário do contato à lista de contatos
+   lista_contatos.append(contato.copy())
+   print('Contato cadastrado com sucesso!')
+
+# Função para consultar contatos
+def consultar_contatos():
+   while True:
+       # Exibe o menu de consulta com as opções disponíveis
+       print('-' * 30)
+       print('MENU CONSULTAR CONTATOS \n')
+       print('1. Consultar todos')
+       print('2. Consultar por Id')
+       print('3. Consultar por Atividade')
+       print('4. Retornar ao menu principal')
+
+       # Solicita ao usuário a escolha de consulta e trata erros de entrada
+       escolha = input('>> ')
+       try:
+           escolha = int(escolha)
+       except ValueError:
+           print('Opção inválida. Tente novamente.')
+           continue
+
+       # Opção 1: Exibe todos os contatos cadastrados
+       if escolha == 1:
+           for contato in lista_contatos:
+               # Mostra cada atributo de cada contato
+               for chave, valor in contato.items():
+                   print(f'{chave}: {valor}')
+               print('-' * 30)  # Separador entre contatos
+       # Opção 2: Consulta um contato específico por ID
+       elif escolha == 2:
+           id = input('Digite o id do contato: \n')
+           try:
+               id = int(id)
+           except ValueError:
+               print('ID inválido. Tente novamente.')
+               continue
+           # Procura o contato com o ID fornecido e exibe suas informações
+           for contato in lista_contatos:
+               if contato['Id'] == id:
+                   for chave, valor in contato.items():
+                       print(f'{chave}: {valor}')
+                   print('-' * 30)
+                   break
+           else:
+               print('Contato não encontrado.')
+       # Opção 3: Consulta contatos por atividade
+       elif escolha == 3:
+           atividade = input('Digite a atividade do contato: \n')
+           # Procura e exibe todos os contatos que possuem a atividade especificada
+           for contato in lista_contatos:
+               if contato['Atividade'] == atividade:
+                   for chave, valor in contato.items():
+                       print(f'{chave}: {valor}')
+                   print('-' * 30)
+       # Opção 4: Retorna ao menu principal
+       elif escolha == 4:
+           print('Retornando ao menu principal...')
+           return
+       else:
+           print('Opção inválida. Tente novamente.')
+
+# Função para remover um contato
+def remover_contato():
+   while True:
+       # Exibe o menu de remoção e solicita o ID do contato a ser removido
+       print('-' * 30)
+       print('MENU REMOVER CONTATO \n')
+       remove_id = input('Digite o id do contato a ser removido (ou "sair" para voltar): ')
+
+       # Permite retornar ao menu principal digitando "sair"
+       if remove_id.lower() == "sair":
+           print('Retornando ao menu principal...')
+           return
+
+       # Verifica se a entrada é um número válido
+       try:
+           remove_id = int(remove_id)
+       except ValueError:
+           print('ID inválido. Tente novamente.')
+           continue
+
+       # Procura o contato pelo ID e, se encontrado, remove-o da lista
+       for contato in lista_contatos:
+           if contato['Id'] == remove_id:
+               lista_contatos.remove(contato)
+               print('Contato removido com sucesso!')
+               return  # Retorna ao menu principal após remoção
+       else:
+           print('Contato não encontrado.')
+
+# Loop principal do programa
+while True:
+   # Exibe o menu principal com as opções disponíveis
+   print('-' * 50)
+   print('MENU PRINCIPAL \n')
+   print('1. Cadastrar Contato')
+   print('2. Consultar Contato(s)')
+   print('3. Remover Contato')
+   print('4. Sair')
+
+   # Tenta converter a entrada do usuário para um número e trata erros
+   try:
+       escolha = int(input('>> '))
+       if escolha == 1:
+           # Incrementa o ID global e chama a função de cadastro
+           id_global += 1
+           cadastrar_contato(id_global)
+       elif escolha == 2:
+           # Chama a função para consultar contatos
+           consultar_contatos()
+       elif escolha == 3:
+           # Chama a função para remover um contato
+           remover_contato()
+       elif escolha == 4:
+           # Encerra o programa
+           print('Saindo do programa...')
+           break
+       else:
+           print('Opção inválida. Escolha entre 1 a 4.')
+   except ValueError:
+       print('Opção inválida. Tente novamente.')
