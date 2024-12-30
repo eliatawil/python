@@ -1,0 +1,123 @@
+# Exibe uma mensagem de boas-vindas
+print('Bem-vindos a madeireira do lenhador Elia Tawil \n')
+
+
+# Função para exibir o menu de tipos de madeira
+def menu():
+    print('Entre com o tipo de madeira desejado')
+    print('PIN - Tora de Pinho')
+    print('PER - Tora de Peroba')
+    print('MOG - Tora de Mogno')
+    print('IPE - Tora de Ipe')
+    print('IMB - Tora de Imbuia')
+
+
+# Define os preços por m³ de cada tipo de madeira
+pin = 150.40
+per = 170.20
+mog = 190.90
+ipe = 210.10
+imb = 220.70
+total = 0  # Variável para o valor total da compra
+tipoMadeira = ''  # Variável para armazenar o tipo de madeira selecionado
+desconto = 0  # Variável para armazenar o desconto aplicado
+
+
+# Função para solicitar o tipo de madeira desejado e retornar o preço correspondente
+def escolha_tipo():
+    global tipoMadeira
+    menu()  # Exibe o menu
+    tipoMadeira = input('>> ').upper()  # Captura a entrada do usuário e converte para maiúsculas
+    if tipoMadeira == 'PIN':
+        return pin
+    elif tipoMadeira == 'PER':
+        return per
+    elif tipoMadeira == 'MOG':
+        return mog
+    elif tipoMadeira == 'IPE':
+        return ipe
+    elif tipoMadeira == 'IMB':
+        return imb
+    else:
+        print('Opção inválida')  # Mensagem de erro para opções inválidas
+        return escolha_tipo()  # Rechama a função para uma nova tentativa
+
+
+# Função para solicitar a quantidade de toras e definir o desconto com base na quantidade
+def qtd_toras():
+    global desconto
+    while True:
+        try:
+            # Solicita a quantidade de toras em m³
+            qtd = int(input('Entre com a quantidade de toras (m³): '))
+        except ValueError:
+            print('Somente números, tente novamente')  # Mensagem de erro para valores não numéricos
+        else:
+            if qtd <= 0:
+                print('Quantidade inválida')  # Verifica se a quantidade é positiva
+            else:
+                # Define o desconto com base na quantidade
+                if qtd < 100:
+                    desconto = 0
+                elif 100 <= qtd < 500:
+                    desconto = 0.04
+                elif 500 <= qtd < 1000:
+                    desconto = 0.09
+                elif 1000 <= qtd <= 2000:
+                    desconto = 0.16
+                else:
+                    print('Não é aceito pedidos com essa quantidade de toras')
+                    continue
+                break  # Sai do loop se a quantidade for válida
+
+    # Exibe a quantidade escolhida, o tipo de madeira e o desconto aplicável
+    print(f'Você escolheu {qtd} m³ de toras de {tipoMadeira} com desconto de {desconto * 100:.0f}% \n')
+    return qtd, desconto  # Retorna a quantidade e o desconto
+
+
+# Função para selecionar o tipo de transporte e retornar o custo correspondente
+def transporte():
+    # Custo de acordo com o transporte oferecido
+    transporteRod = 1000.00 
+    transporteFerro = 2000.00
+    transporteHidro = 2500.00
+
+    # Exibe as opções de transporte
+    print('Entre com o tipo de transporte')
+    print('1 - Rodoviário - R$ 1000.00')
+    print('2 - Ferroviário - R$ 2000.00')
+    print('3 - Hidroviário - R$ 2500.00')
+
+    try:
+        tipoTransporte = int(input('>> '))  # Solicita a escolha do tipo de transporte
+    except ValueError:
+        print('Opção inválida. Digite de 1 a 3...')
+        return transporte()  # Solicita a entrada novamente em caso de erro
+    else:
+        # Retorna o custo de transporte com base na escolha do usuário
+        if tipoTransporte == 1:
+            return transporteRod
+        elif tipoTransporte == 2:
+            return transporteFerro
+        elif tipoTransporte == 3:
+            return transporteHidro
+        else:
+            print('Opção inválida')
+            return transporte()  # Solicita a entrada novamente para opções inválidas
+
+
+# Fluxo principal do programa
+valor_escolhido = escolha_tipo()  # Captura o valor por m³ do tipo de madeira escolhido
+print(f'Você escolheu {tipoMadeira} no valor de R$ {valor_escolhido:.2f} o m³ \n')
+
+# Captura a quantidade de toras e o desconto aplicável
+qtd, desconto = qtd_toras()
+
+# Captura o custo de transporte
+custo_transporte = transporte()
+
+# Calcula o valor total com desconto e adiciona o custo de transporte
+total = (qtd * valor_escolhido * (1 - desconto)) + custo_transporte
+
+# Exibe o valor total final com desconto e transporte
+print(f'Valor total com desconto e transporte é de: R$ {total:.2f}')
