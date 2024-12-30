@@ -1,0 +1,81 @@
+# Impressão do cabeçalho da pizzaria
+print('-' * 10, 'Bem-vindos a pizzaria do Elia Tawil', '-' * 10)
+print('-' * 24, 'Cadápio', '-' * 24)
+print('---','|', 'Tamanho', '|', 'Pizza Salgada (PS)', '|','Pizza Doce (PD)', '|', '--')
+print('---','|', ' ' * 2,  'P', '   |    ', 'R$30.00', '       |   ', 'R$34.00', '     |', '--')
+print('---','|', ' ' * 2,  'M', '   |    ', 'R$45.00', '       |   ', 'R$48.00', '     |', '--')
+print('---','|', ' ' * 2,  'G', '   |    ', 'R$60.00', '       |   ', 'R$66.00', '     |', '--')
+print('-' * 57)
+
+# Preços das pizzas
+psp = 38.00
+psm = 45.00
+psg = 60.00
+pdp = 34.00
+pdm = 48.00
+pdg = 66.00
+
+# Total
+total = 0
+
+while True:
+    # Zera a variável contadora
+    cont = 0
+
+    # Solicita o sabor da pizza
+    pizza = input('Entre com o sabor desejado (PS/PD): ').lower()
+
+    # Verifica se o sabor é válido
+    if pizza == 'pd' or pizza == 'ps':
+        cont = cont + 1
+    else:
+        print('Sabor inválido! Tente novamente.\n')
+        continue
+
+    # Solicita o tamanho da pizza doce
+    if pizza == 'pd':
+        tamanho = input('Entre com o tamanho desejado (P/M/G): ').lower()
+
+        # Verifica o tamanho e calcula o total
+        if tamanho == 'p':
+            total = total + pdp * cont
+            print(f'Você pediu uma Pizza Doce no tamanho P: R$ {pdp:.2f}\n')
+        elif tamanho == 'm':
+            total = total + pdm * cont
+            print(f'Você pediu uma Pizza Doce no tamanho M: R$ {pdm:.2f}\n')
+        elif tamanho == 'g':
+            total = total + pdg * cont
+            print(f'Você pediu uma Pizza Doce no tamanho G: R$ {pdg:.2f}\n')
+        else:
+            print('Tamanho inválido! Tente novamente.\n')
+            continue
+
+    # Solicita o tamanho da pizza doce
+    elif pizza == 'ps':
+        tamanho = input('Entre com o tamanho desejado (P/M/G): ').lower()
+
+        # Verifica o tamanho e calcula o total
+        if tamanho == 'p':
+            total = total + psp * cont
+            print(f'Você pediu uma Pizza Salgada no tamanho P: R$ {psp:.2f}\n')
+        elif tamanho == 'm':
+            total = total + psm * cont
+            print(f'Você pediu uma Pizza Salgada no tamanho M: R$ {psm:.2f}\n')
+        elif tamanho == 'g':
+            total = total + psg * cont
+            print(f'Você pediu uma Pizza Salgada no tamanho G: R$ {psg:.2f}\n')
+        else:
+            print('Tamanho inválido!')
+            continue
+
+    # Pergunta se deseja algo mais
+    deseja = input('Deseja algo mais? (S/N) ').lower()
+
+    # Verifica a resposta
+    if deseja == 'n':
+        print(f'Total a pagar: R$ {total:.2f}')
+        break
+    elif deseja == 's':
+        continue
+    else:
+        print('Opção inválida!')
